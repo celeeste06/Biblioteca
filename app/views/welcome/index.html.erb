@@ -1,0 +1,58 @@
+<div class = "row">
+    
+    <div class = "col-xs-5 well">
+        <center>
+            <h1>
+                AUTORES
+            </h1>
+            <div class="blanco">
+                <% @autores.each do |autor| %>
+                    <h3>
+                        <%= autor.name %>
+                        <%= autor.surname %>
+                    </h3>
+                    <b>Pais</b> : <%= autor.country %>
+                    <br>
+                    <a data-confirm="¿Esta seguro que quiere eliminar el autor?" class="btn btn-danger btn-xs" rel="nofollow" data-method="delete" href=<%="/authors/#{autor.id}"%>>
+                        <span class="glyphicon glyphicon-trash"></span>
+                            Eliminar
+                      </a>
+                <% end %>
+            </div>
+        </center>
+    </div>
+    
+    <div class = "col-xs-1">
+    </div>
+    
+    <div class = "col-xs-5 well">
+       <center>
+            <h1>
+                LIBROS
+            </h1>
+            <div class="blanco">
+                <% @libros.each do |libro| %>
+                    <h3>
+                        <%= libro.title %>
+                    </h3>
+                    <% if Author.exists?(libro.author_id) %>
+                        <b>Autor:</b> <%= Author.find(libro.author_id).name %>
+                    <% else %>
+                        <b>Autor:</b> Anonimo
+                    <% end %>
+    
+                    <br>
+                    <b>Año: </b><%= libro.year %>
+                    <br>
+                    <b>ISBN: </b><%= libro.isbn %>
+                    <br>
+                    <a data-confirm="¿Esta seguro que quiere eliminar el libro?" class="btn btn-danger btn-xs" rel="nofollow" data-method="delete" href=<%="/books/#{libro.id}"%>>
+                        <span class="glyphicon glyphicon-trash"></span>
+                            Eliminar
+                    </a>
+                <% end %>
+            </div>
+        </center>
+    </div>
+    
+</div>
